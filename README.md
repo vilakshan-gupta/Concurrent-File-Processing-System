@@ -16,8 +16,99 @@ Our solution considers IPv6 support for enhanced network compatibility, providin
 
 # Software architecture:
 
+Our solution follows a multithreaded architecture where multiple threads concurrently process input files and write the results to an output file. The software architecture involves:
+LineReader Struct: Manages concurrent reading of lines from multiple files.
+write_lines Function: Writes lines from LineReader to an output file using threads.
+get_files_in_directory Function: Retrieves a list of file paths from a specified directory.
+Main Function: Orchestrates the concurrent processing and measures elapsed time.
+Reused and Developed Components:
+We reused Rust's standard library for file I/O and threading. The use of Arc (Atomic Reference Counter) and Mutex for thread safety is a development based on Rust's ownership model.
 
-# PoPL Aspects:
+![Alt text](https://ibb.co/bsHnxH2)
+
+Testing Component Placement:
+
+Testing is primarily done locally, involving various input file scenarios to ensure the correctness of concurrent file processing.
+Database Involvement:
+No database is involved in the current implementation.
+Software Architecture Explanation:
+The LineReader struct manages the concurrent reading of lines from multiple input files, utilizing Rust's ownership model to prevent data races.
+The write_lines function writes lines from the LineReader to an output file concurrently using threads, ensuring synchronization with a Mutex and Condvar.
+The get_files_in_directory function retrieves a list of file paths from a specified directory, enabling dynamic input file discovery.
+The main function orchestrates the entire process, measuring elapsed time and ensuring proper thread joining.
+
+Challenges Faced:
+Ensuring proper synchronization and thread safety in the presence of concurrent file access.
+Coordinating multiple threads efficiently while managing shared resources.
+Debugging potential deadlocks and optimizing the architecture for optimal performance.
+
+# POPL Aspects:
+Ownership and Borrowing (LineReader):
+
+Code Pointers:
+LineReader struct effectively manages ownership of files, preventing multiple threads from accessing them simultaneously.
+Explanation:
+Rust's ownership model ensures that each LineReader instance exclusively owns its associated files. This prevents data races and ensures safe concurrent file access.
+
+Mutex for Thread Safety (write_lines):
+Code Pointers:
+Mutex is used in the write_lines function to ensure exclusive access to the output file.
+Explanation:
+The Mutex guarantees that only one thread can write to the output file at a time, preventing data corruption and adhering to Rust's principles of preventing data races.
+Arc for Shared Ownership (main):
+Code Pointers:
+Arc is utilized to share ownership of the LineReader and Condvar between threads.
+Explanation:
+Arc allows multiple threads to share ownership of the LineReader, facilitating synchronized access and coordination during concurrent processing.
+Conditional Variable (write_lines):
+Code Pointers:
+Condvar efficiently notifies waiting threads when a new line is written, avoiding busy waiting.
+Explanation:
+Condvar is essential for optimizing thread coordination, ensuring that threads efficiently wait for new lines without continuously checking for availability.
+Error Handling (main):
+Code Pointers:
+Rust's Result type is extensively used for proper error propagation and handling.
+Explanation:
+The use of Result ensures that errors are properly managed and reported, aligning with Rust's emphasis on reliability and error handling.
+Experience and Difficulties:
+Implementing ownership concepts, while conceptually clear, required careful consideration to prevent ownership conflicts during concurrent file processing.
+Ensuring the proper use of Mutex and Condvar for thread safety and synchronization was crucial, and debugging potential deadlocks and race conditions was challenging.
+The use of Result for error handling provided a robust mechanism for handling errors, but ensuring comprehensive coverage required thorough testing with various input scenarios.
+5) Potential for Future Work:
+Future Work:
+Enhanced Error Handling and Recovery:
+Description:
+Implement more advanced error handling mechanisms to enhance fault tolerance and recovery from unexpected failures during file processing.
+POPL Aspects:
+Explore additional Rust features or external libraries that can improve error detection and recovery strategies.
+Optimizations for Improved Throughput:
+Description:
+Investigate and implement optimizations to further enhance the system's throughput, considering factors like file chunking or parallelized processing techniques.
+POPL Aspects:
+Leverage Rust's ownership and borrowing model to optimize data access and minimize contention during concurrent file processing.
+Exploration of Advanced Concurrency Patterns:
+Description:
+Explore and implement advanced concurrency patterns provided by Rust, such as async/await or more sophisticated threading models, to potentially improve efficiency.
+POPL Aspects:
+Examine how advanced concurrency patterns align with Rust's ownership and borrowing principles for better code safety.
+Extended Support for Different File Formats:
+Description:
+Extend the system's capabilities to support a broader range of file formats, including structured data formats like JSON or CSV, enhancing versatility.
+POPL Aspects:
+Consider how Rust's ownership model can be adapted to handle more complex data structures commonly found in structured file formats.
+Other POPL Aspects:
+Integration of Rust and C++ for Specific Use Cases:
+Description:
+Explore specific use cases where Rust's safety features can complement low-level control provided by C++, identifying scenarios where a hybrid approach is most beneficial.
+POPL Aspects:
+Examine the interplay of Rust's ownership model with manual memory management in C++ for specific tasks to harness the strengths of both languages.
+Investigation of More Advanced Concurrency Mechanisms:
+Description:
+Investigate more advanced concurrency mechanisms provided by Rust, such as channels or actors, to evaluate their impact on system performance and safety.
+POPL Aspects:
+Analyze how these advanced concurrency mechanisms align with Rust's ownership and borrowing principles for enhanced safety and efficiency.
+These proposed future work items aim to refine and expand the current solution, exploring additional POPL concepts and addressing potential areas for enhancement and optimization.
+
 
 
 # Results:
