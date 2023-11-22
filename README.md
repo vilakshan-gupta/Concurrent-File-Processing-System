@@ -24,7 +24,7 @@ Main Function: Orchestrates the concurrent processing and measures elapsed time.
 Reused and Developed Components:
 We reused Rust's standard library for file I/O and threading. The use of Arc (Atomic Reference Counter) and Mutex for thread safety is a development based on Rust's ownership model.
 
-![Alt text](https://ibb.co/bsHnxH2)
+![Alt text](capture.jpg)
 
 Testing Component Placement:
 
