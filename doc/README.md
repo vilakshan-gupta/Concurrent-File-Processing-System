@@ -104,6 +104,29 @@ Debugging potential deadlocks and optimizing the architecture for optimal perfor
    - **POPL Aspects:**
      - Consider how Rust's ownership model can be adapted to handle more complex data structures commonly found in structured file formats.
 
+# Compilation and Execution Instructions
+
+## For C++
+
+Navigate to the "code_orig" directory:
+
+```bash
+cd code_orig
+```
+For c++
+```
+g++ -std=c++17 main.cpp
+./a.out
+```
+
+For rust
+```
+rustc main.rs
+./main
+```
+
+Results would be output in the parent directory
+
 
 
 
