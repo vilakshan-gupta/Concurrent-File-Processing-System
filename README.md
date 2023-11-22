@@ -42,40 +42,39 @@ Ensuring proper synchronization and thread safety in the presence of concurrent 
 Coordinating multiple threads efficiently while managing shared resources.
 Debugging potential deadlocks and optimizing the architecture for optimal performance.
 
-# POPL Aspects:
-Ownership and Borrowing (LineReader):
+### 3) POPL Aspects:
 
-Code Pointers:
-LineReader struct effectively manages ownership of files, preventing multiple threads from accessing them simultaneously.
-Explanation:
-Rust's ownership model ensures that each LineReader instance exclusively owns its associated files. This prevents data races and ensures safe concurrent file access.
+**POPL Aspects Involved:**
 
-Mutex for Thread Safety (write_lines):
-Code Pointers:
-Mutex is used in the write_lines function to ensure exclusive access to the output file.
-Explanation:
+1. **Ownership and Borrowing (LineReader):**
+   - *Code Pointers:*
+     - `LineReader` struct effectively manages ownership of files, preventing multiple threads from accessing them simultaneously.
+   - *Explanation:*
+     - Rust's ownership model ensures that each `LineReader` instance exclusively owns its associated files. This prevents data races and ensures safe concurrent file access.
 
+2. **Mutex for Thread Safety (write_lines):**
+   - *Code Pointers:*
+     - `Mutex` is used in the `write_lines` function to ensure exclusive access to the output file.
+   - *Explanation:*
+     - The `Mutex` guarantees that only one thread can write to the output file at a time, preventing data corruption and adhering to Rust's principles of preventing data races.
 
-The Mutex guarantees that only one thread can write to the output file at a time, preventing data corruption and adhering to Rust's principles of preventing data races.
-Arc for Shared Ownership (main):
-Code Pointers:
-Arc is utilized to share ownership of the LineReader and Condvar between threads.
-Explanation:
-Arc allows multiple threads to share ownership of the LineReader, facilitating synchronized access and coordination during concurrent processing.
-Conditional Variable (write_lines):
-Code Pointers:
-Condvar efficiently notifies waiting threads when a new line is written, avoiding busy waiting.
-Explanation:
-Condvar is essential for optimizing thread coordination, ensuring that threads efficiently wait for new lines without continuously checking for availability.
-Error Handling (main):
-Code Pointers:
-Rust's Result type is extensively used for proper error propagation and handling.
-Explanation:
-The use of Result ensures that errors are properly managed and reported, aligning with Rust's emphasis on reliability and error handling.
-Experience and Difficulties:
-Implementing ownership concepts, while conceptually clear, required careful consideration to prevent ownership conflicts during concurrent file processing.
-Ensuring the proper use of Mutex and Condvar for thread safety and synchronization was crucial, and debugging potential deadlocks and race conditions was challenging.
-The use of Result for error handling provided a robust mechanism for handling errors, but ensuring comprehensive coverage required thorough testing with various input scenarios.
+3. **Arc for Shared Ownership (main):**
+   - *Code Pointers:*
+     - `Arc` is utilized to share ownership of the `LineReader` and `Condvar` between threads.
+   - *Explanation:*
+     - `Arc` allows multiple threads to share ownership of the `LineReader`, facilitating synchronized access and coordination during concurrent processing.
+
+4. **Conditional Variable (write_lines):**
+   - *Code Pointers:*
+     - `Condvar` efficiently notifies waiting threads when a new line is written, avoiding busy waiting.
+   - *Explanation:*
+     - `Condvar` is essential for optimizing thread coordination, ensuring that threads efficiently wait for new lines without continuously checking for availability.
+
+5. **Error Handling (main):**
+   - *Code Pointers:*
+     - Rust's `Result` type is extensively used for proper error propagation and handling.
+   - *Explanation:*
+     - The use of `Result` ensures that errors are properly managed and reported, aligning with Rust's emphasis on reliability and error handling.
 
 # Potential for Future Work:
 
