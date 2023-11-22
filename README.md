@@ -54,6 +54,8 @@ Mutex for Thread Safety (write_lines):
 Code Pointers:
 Mutex is used in the write_lines function to ensure exclusive access to the output file.
 Explanation:
+
+
 The Mutex guarantees that only one thread can write to the output file at a time, preventing data corruption and adhering to Rust's principles of preventing data races.
 Arc for Shared Ownership (main):
 Code Pointers:
@@ -74,38 +76,44 @@ Experience and Difficulties:
 Implementing ownership concepts, while conceptually clear, required careful consideration to prevent ownership conflicts during concurrent file processing.
 Ensuring the proper use of Mutex and Condvar for thread safety and synchronization was crucial, and debugging potential deadlocks and race conditions was challenging.
 The use of Result for error handling provided a robust mechanism for handling errors, but ensuring comprehensive coverage required thorough testing with various input scenarios.
-5) Potential for Future Work:
+
+# Potential for Future Work:
+
 Future Work:
+
 Enhanced Error Handling and Recovery:
-Description:
+
 Implement more advanced error handling mechanisms to enhance fault tolerance and recovery from unexpected failures during file processing.
-POPL Aspects:
+
 Explore additional Rust features or external libraries that can improve error detection and recovery strategies.
+
 Optimizations for Improved Throughput:
-Description:
+
 Investigate and implement optimizations to further enhance the system's throughput, considering factors like file chunking or parallelized processing techniques.
-POPL Aspects:
+
 Leverage Rust's ownership and borrowing model to optimize data access and minimize contention during concurrent file processing.
+
 Exploration of Advanced Concurrency Patterns:
-Description:
+
 Explore and implement advanced concurrency patterns provided by Rust, such as async/await or more sophisticated threading models, to potentially improve efficiency.
-POPL Aspects:
+
 Examine how advanced concurrency patterns align with Rust's ownership and borrowing principles for better code safety.
+
 Extended Support for Different File Formats:
-Description:
+
 Extend the system's capabilities to support a broader range of file formats, including structured data formats like JSON or CSV, enhancing versatility.
-POPL Aspects:
+
 Consider how Rust's ownership model can be adapted to handle more complex data structures commonly found in structured file formats.
-Other POPL Aspects:
+
 Integration of Rust and C++ for Specific Use Cases:
-Description:
+
 Explore specific use cases where Rust's safety features can complement low-level control provided by C++, identifying scenarios where a hybrid approach is most beneficial.
-POPL Aspects:
+
 Examine the interplay of Rust's ownership model with manual memory management in C++ for specific tasks to harness the strengths of both languages.
 Investigation of More Advanced Concurrency Mechanisms:
-Description:
+
 Investigate more advanced concurrency mechanisms provided by Rust, such as channels or actors, to evaluate their impact on system performance and safety.
-POPL Aspects:
+
 Analyze how these advanced concurrency mechanisms align with Rust's ownership and borrowing principles for enhanced safety and efficiency.
 These proposed future work items aim to refine and expand the current solution, exploring additional POPL concepts and addressing potential areas for enhancement and optimization.
 
@@ -113,5 +121,9 @@ These proposed future work items aim to refine and expand the current solution, 
 
 # Results:
 
+Found in the resuults folder
 
-# Potential Future Work:
+
+
+
+
