@@ -131,7 +131,7 @@ Results would be output in the parent directory
 
 # Results:
 
-Found in the resuults folder
+Found in the results folder
 
 
 
